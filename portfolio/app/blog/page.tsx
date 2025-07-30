@@ -1,22 +1,20 @@
 // app/blog/page.tsx
-import { getBlogPosts } from "../api/fetchAPIs";
 import Link from "next/link";
 
-export default async function Blog() {
-  const posts = await getBlogPosts();
-console.log(posts);
-
+export default async function BlogPage() {
   return (
-    <main className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 max-w-4xl mx-auto">
-      {posts.map((post) => (
-        <Link
-          href={`/blog/${post.slug}`}
-          key={post.slug}
-          className="border p-4 rounded-2xl shadow hover:shadow-lg transition"
-        >
-          <h2 className="text-xl font-semibold">{post.title}</h2>
-        </Link>
-      ))}
-    </main>
+    <div className="p-6 max-w-4xl mx-auto">
+      <h1 className="text-3xl font-bold mb-6">Blog Posts</h1>
+      <div className="grid gap-4">
+        <article className="border rounded-lg p-4">
+          <h2 className="text-xl font-semibold mb-2">
+            <Link href="/blog/sample-post" className="hover:text-blue-600">
+              Sample Blog Post
+            </Link>
+          </h2>
+          <p className="text-gray-600 mb-2">This is a sample blog post that will be populated with real content when deployed.</p>
+        </article>
+      </div>
+    </div>
   );
 }
