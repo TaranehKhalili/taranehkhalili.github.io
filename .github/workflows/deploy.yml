@@ -18,20 +18,25 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '18'
-        cache: 'npm'
-        cache-dependency-path: portfolio/package-lock.json
+        cache: 'pnpm'
+        cache-dependency-path: portfolio/pnpm-lock.yaml
+        
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 8
         
     - name: Install dependencies
       run: |
         cd portfolio
-        npm ci
+        pnpm install --frozen-lockfile
         
     - name: Build project
       env:
         NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
       run: |
         cd portfolio
-        npm run build
+        pnpm run build
         
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
