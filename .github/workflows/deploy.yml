@@ -27,6 +27,8 @@ jobs:
         npm ci
         
     - name: Build project
+      env:
+        NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
       run: |
         cd portfolio
         npm run build
